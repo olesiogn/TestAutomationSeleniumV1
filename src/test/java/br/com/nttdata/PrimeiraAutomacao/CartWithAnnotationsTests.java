@@ -1,11 +1,13 @@
-package br.com.nttdata;
+package br.com.nttdata.PrimeiraAutomacao;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,15 +16,21 @@ import java.time.Duration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class CartTests {
+public class CartWithAnnotationsTests {
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    @Before
+    public void setUp() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    }
 
     @Test
     public void testCreateCart() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-
         driver.get("https://store.vivo.com.br/");
 
         //Clicar em continuar e fechar
@@ -44,7 +52,7 @@ public class CartTests {
 
 
         // Verificar se o produto foi adicionado ao carrinho
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
         WebElement itemNoCarrinho = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("item-description")));
 
         assertTrue("O produto deveria estar visível no carrinho", itemNoCarrinho.isDisplayed());
@@ -54,8 +62,12 @@ public class CartTests {
         System.out.println("Valor total do carrinho: " + valorTotal);
 
         assertEquals("O valor total do carrinho deveria ser igual ao preço do produto", preco, valorTotal);
+    }
 
-
-        driver.quit();
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
