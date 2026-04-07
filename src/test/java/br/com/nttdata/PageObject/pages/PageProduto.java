@@ -1,4 +1,4 @@
-package br.com.nttdata.PageObject.Pages;
+package br.com.nttdata.PageObject.pages;
 
 import br.com.nttdata.PageObject.attributes.AttributesProduto;
 import org.openqa.selenium.WebDriver;
