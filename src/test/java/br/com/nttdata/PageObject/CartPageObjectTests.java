@@ -1,19 +1,15 @@
 package br.com.nttdata.PageObject;
 
-import br.com.nttdata.PageObject.Pages.PageCarrinho;
-import br.com.nttdata.PageObject.Pages.PageCelulares;
-import br.com.nttdata.PageObject.Pages.PageHome;
-import br.com.nttdata.PageObject.Pages.PageProduto;
+import br.com.nttdata.PageObject.pages.PageCarrinho;
+import br.com.nttdata.PageObject.pages.PageCelulares;
+import br.com.nttdata.PageObject.pages.PageHome;
+import br.com.nttdata.PageObject.pages.PageProduto;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
